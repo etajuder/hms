@@ -1,4 +1,4 @@
-    <script type="text/javascript">
+<script type="text/javascript">
 	function showAjaxModal(url)
 	{
 		// SHOWING AJAX PRELOADER IMAGE
@@ -12,7 +12,9 @@
 			url: url,
 			success: function(response)
 			{
+                                
 				jQuery('#modal_ajax .modal-body').html(response);
+                                
 			}
 		});
 	}

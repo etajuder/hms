@@ -1,0 +1,35 @@
+clear
+regressiondata
+hold on
+plot(x,y,'r*','LineWidth',2,'markersize',8)
+hold on
+xlabel('Years(x)')
+ylabel('Total Exp.(millions),y')
+title('Graph of Total Expenditure(y) against Time(x)','FontSize',14)
+coeff = polyfit(x,y,1)
+xline = linspace( min(x), max(x), 200);
+yline = coeff(1) * xline+coeff(2);
+plot(xline,yline,'LineWidth',2)
+hold on
+yfit = polyval(coeff,x)
+yresid = y - yfit;
+ssresid = sum(yresid.^2);
+sstotal = (length(y)-1) * val(y);
+sstotal = (length(y)-1) * var(y);
+rsq = 1 - ssresid/sstotal;
+a1str = num2str(coeff(1));
+a0str = num2str(coeff(2));
+equstr = ['y = (', a1str, ')*x + (', a0str, ')'];
+rsqstr = ['r^2 = (', num2str(rsq), ')'];
+gtext(4,150,{equstr,rsqstr})
+gtext({equstr,rsqstr})
+
+% error calculation
+clear
+regressiondata
+coeff = polyfit(x,y,1)
+yest = coeff(1)* x + coeff(2);
+abs_err = abs(y-yest)
+abs_err = (y-yest)
+abs_err.^2
+std_err = sqrt(sum(abs_err.^2)/(length(y)-2))

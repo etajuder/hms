@@ -6,6 +6,7 @@
 <div style="clear:both;"></div>
 <br>
 <?php } ?>
+ 
 <table class="table table-bordered table-striped datatable" id="table-2">
     <thead>
         <tr>
@@ -41,7 +42,7 @@
                             <i class="fa fa-eye"></i>
                             View Prescription
                     </a>
-                    <a  onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/manage_diagnosis_report/<?php echo $row['prescription_id']; ?>/<?php echo $row['doctor_id']; ?>');" 
+                    <a  href="<?php echo base_url();?>index.php?doctor/diagnosis_report/<?php echo $row['prescription_id']; ?>/<?php echo $row['doctor_id']; ?>" 
                         class="btn btn-default btn-sm btn-icon icon-left">
                             <i class="fa fa-eye"></i>
                             View Diagnosis Report

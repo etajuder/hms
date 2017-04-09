@@ -96,6 +96,8 @@
             </a>
         </li>
         
+      
+        
         <li class="<?php if ($page_name == 'manage_patient' ||
             ($page_name == 'manage_prescription' && $menu_check == 'from_patient')) echo 'active'; ?> ">
                 <a href="<?php echo base_url(); ?>index.php?doctor/patient">

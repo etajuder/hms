@@ -283,6 +283,13 @@ class Doctor extends CI_Controller {
             $this->session->set_flashdata('message', get_phrase('diagnosis_report_info_deleted_successfuly'));
             redirect(base_url() . 'index.php?doctor/prescription');
         }
+             $data["param1"] = $task;
+             $data["param2"] = $diagnosis_report_id;
+             $data['menu_check'] = 'from_diagnosis';
+            $data['page_name'] = 'manage_diagnosis_report';
+        $data['page_title'] = get_phrase('diagnosis');
+        $this->load->view('backend/index', $data);
+    
     }
 
     /* private messaging */
