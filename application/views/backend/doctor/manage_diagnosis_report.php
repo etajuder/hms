@@ -1,6 +1,15 @@
+<html>
+    <head>
+        <title>title</title>
+    </head>
+    <body>
+
+
+
 <?php
-$prescription_id        = $param2;
-$doctor_id              = $param3;
+$prescription_id        = $param1;
+$doctor_id              = $param2;
+
 $diagnosis_report_info  = $this->db->get_where('diagnosis_report', array('prescription_id' => $param2))->result_array();
 ?>
 <?php if ( !empty($diagnosis_report_info) ) { ?>
@@ -74,6 +83,7 @@ $diagnosis_report_info  = $this->db->get_where('diagnosis_report', array('prescr
                         </div>
                     </div>
                     
+                    
                     <div class="form-group">
                         <label for="field-ta" class="col-sm-3 control-label"><?php echo get_phrase('report_type'); ?></label>
 
@@ -87,6 +97,32 @@ $diagnosis_report_info  = $this->db->get_where('diagnosis_report', array('prescr
                     </div>
                     
                     <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label"><?php echo get_phrase('document_type'); ?></label>
+
+                        <div class="col-sm-5">
+                            <select name="document_type" class="form-control" id="doc_type">
+                                <option value=""><?php echo get_phrase('select_document_type'); ?></option>
+                                <option value="image"><?php echo get_phrase('image'); ?></option>
+                                <option value="doc"><?php echo get_phrase('doc'); ?></option>
+                                <option value="pdf"><?php echo get_phrase('pdf'); ?></option>
+                                <option value="excel"><?php echo get_phrase('excel'); ?></option>
+                                <option value="audio"><?php echo get_phrase('audio'); ?></option>
+                                <option value="other"><?php echo get_phrase('other'); ?></option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div style="padding: 4px; width: 50%; margin: 0px auto;" hidden="" id="rec_holder">
+                         <a onclick="startRecording(this);">record</a>
+  <a onclick="stopRecording(this);" disabled>stop</a>
+  
+  <h2>Recordings</h2>
+  <ul id="recordingslist"></ul>
+  
+  <h2>Log</h2>
+  <pre id="log"></pre>
+                    </div>
+                    <div class="form-group" id="other_doc" hidden="">
                         <label class="col-sm-3 control-label"><?php echo get_phrase('document'); ?></label>
 
                         <div class="col-sm-5">
@@ -96,20 +132,7 @@ $diagnosis_report_info  = $this->db->get_where('diagnosis_report', array('prescr
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="field-ta" class="col-sm-3 control-label"><?php echo get_phrase('document_type'); ?></label>
-
-                        <div class="col-sm-5">
-                            <select name="document_type" class="form-control">
-                                <option value=""><?php echo get_phrase('select_document_type'); ?></option>
-                                <option value="image"><?php echo get_phrase('image'); ?></option>
-                                <option value="doc"><?php echo get_phrase('doc'); ?></option>
-                                <option value="pdf"><?php echo get_phrase('pdf'); ?></option>
-                                <option value="excel"><?php echo get_phrase('excel'); ?></option>
-                                <option value="other"><?php echo get_phrase('other'); ?></option>
-                            </select>
-                        </div>
-                    </div>
+                    
                     
                     <div class="form-group">
                         <label for="field-ta" class="col-sm-3 control-label"><?php echo get_phrase('description'); ?></label>
@@ -133,6 +156,23 @@ $diagnosis_report_info  = $this->db->get_where('diagnosis_report', array('prescr
     </div>
 </div>
 <?php } ?>
+
+<script>
+$("body").on("change","#doc_type",function(event){
+   var val = $(this).val();
+ var holder =  $("#rec_holder");
+ var other_doc = $("#other_doc");
+   if(val === "audio"){
+       holder.removeAttr("hidden");
+       other_doc.attr("hidden","");
+   }else{
+       other_doc.removeAttr("hidden");
+       holder.attr("hidden","");
+   }
+});
+
+
+</script>
 
 <script type="text/javascript">
     jQuery(window).load(function ()
@@ -169,3 +209,7 @@ $diagnosis_report_info  = $this->db->get_where('diagnosis_report', array('prescr
         });
     });
 </script>
+
+
+    </body>
+</html>
